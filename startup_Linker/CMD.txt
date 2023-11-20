@@ -1,0 +1,56 @@
+-Wall => Enable warning
+-g    => Generate debugging info
+-o    => Change the name of the output file (not to be default name [a.o])
+-E    => Preprocessor only
+-S    => Compile without assemply & link
+-c    => Compile & assemply without link
+cls   => clear cmd
+
+
+Normal C
+(1) gcc -Wall -g -c main.c -o main.o (Get object file)
+
+with ARM:
+(1) arm-none-eabi-gcc (Test command)
+(2) arm-none-eabi-gcc --version
+(3) arm-none-eabi-gcc --help
+(4) arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb main.c -o main.o (Get object file )
+(5) arm-none-eabi-objdump -D main.o (all info about main app)
+(6) arm-none-eabi-objdump -t main.o (Symbol table)
+(7) arm-none-eabi-ld main.o main2.o -o app.o (Linking) 
+(8) arm-none-eabi-ld main.o main2.o -o app.o -Map app.map -T Linker_skript.ld (Linking with my Linker Skript and get app.map)
+(9) arm-none-eabi-ld -Map app.map -T LinkerScript.ld main.o main2.o -o app.elf (Get elf with my Linker Skript)
+(10)arm-none-eabi-objcopy -O binary app.elf app.bin (Get bin)
+(11)arm-none-eabi-objcopy -O ihex app.elf app.hex (Get hex)
+
+
+
+Note: To Store var in specific section :before var write => __attribute__((section("section name"))) 
+EX:
+__attribute__((section(".ahmed")))
+u32 var;
+
+and in linker script: 
+First way: 
+.ahmed:
+{
+  .= ALIGN(4);
+  *(.ahmed)
+  *(.ahmed*)
+  .= ALIGN(4);
+}>FLASH
+Can allocate in any where not just FLASH
+
+Second way: 
+.text:
+{
+  .= ALIGN(4);
+  *(.text)
+  *(.ahmed)
+  *(.text*)
+  .= ALIGN(4);
+}>FLASH
+
+
+
+
