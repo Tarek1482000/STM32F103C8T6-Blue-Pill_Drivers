@@ -48,3 +48,16 @@ u8 IR_Value(IR_POS Ir_pos)
 }
 
 
+u8 IR_is_Black(IR_POS Ir_pos)
+{
+	u8 data = 0;
+
+	if(Ir_pos == IR_RIGHT)
+		GPIO_u8GetPinValue(IR_RIGHT_PORT,IR_RIGHT_PIN,  &data);
+	else if(Ir_pos == IR_LEFT)
+		GPIO_u8GetPinValue(IR_LEFT_PORT,IR_LEFT_PIN,  &data);
+	if(data == IR_BLACK)
+		return IR_BLACK;
+	return IR_NOTBLACK;
+}
+

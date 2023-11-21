@@ -23,4 +23,6 @@ void IR_init(IR_POS Ir_pos);
 u8 IR_Value(IR_POS Ir_pos);
 
 
+u8 IR_is_Black(IR_POS Ir_pos);
+
 #endif /* IR_COLOR_INTERFACE_H_ */

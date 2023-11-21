@@ -24,4 +24,7 @@ typedef enum
 #define IR_LEFT_PORT    GPIO_u8_GPIOC
 #define IR_LEFT_PIN     GPIO_u8_PIN15
 
+#define IR_BLACK           1
+#define IR_NOTBLACK        0
+
 #endif /* IR_COLOR_CONFIG_H_ */

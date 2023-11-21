@@ -63,6 +63,8 @@ void Motors_Init(void)
 
 	GPIO_u8WritePinValue(MOTOR2_PORT, MOTOR2_PIN0, GPIO_u8_LOW);
 	GPIO_u8WritePinValue(MOTOR2_PORT, MOTOR2_PIN1, GPIO_u8_LOW);
+
+	Motors_Speed(0);
 }
 
 
@@ -83,19 +85,6 @@ void MOTORS_Back(u8 speed)
 }
 
 
-void MOTORS_CAR_Right(u8 speed)
-{
-	Motors_Speed(speed);
-	Motor1_Forward();
-	Motor2_Stop();
-}
-
-void MOTORS_CAR_Left(u8 speed)
-{
-	Motors_Speed(speed);
-	Motor2_Forward();
-	Motor1_Stop();
-}
 
 
 void Motors_Speed(u8 speed)
@@ -103,8 +92,6 @@ void Motors_Speed(u8 speed)
 	Motor1_Speed(speed);
 	Motor2_Speed(speed);
 }
-
-
 
 
 

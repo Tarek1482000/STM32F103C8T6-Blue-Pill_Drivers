@@ -11,6 +11,7 @@
 #ifndef HAL_MOTOR_DRIVER_MOTOR_INTERFACE_H_
 #define HAL_MOTOR_DRIVER_MOTOR_INTERFACE_H_
 
+#include "../../LIB/STD_TYPES.h"
 
 /*******************************************************************************
  *                                Definitions                                  *
@@ -26,8 +27,19 @@ void Motors_Init(void);
 void MOTORS_Forward(u8 speed);
 void MOTORS_Back(u8 speed);
 void Motors_Speed(u8 speed);
-void MOTORS_CAR_Right(u8 speed);
-void MOTORS_CAR_Left(u8 speed);
+
+
+void Motor1_Forward(void);
+void Motor2_Forward(void);
+
+void Motor1_Back(void);
+void Motor2_Back(void);
+
+void Motor1_Stop(void);
+void Motor2_Stop(void);
+
+void Motor1_Speed(u8 speed);
+void Motor2_Speed(u8 speed);
 
 
 #endif /* HAL_MOTOR_DRIVER_MOTOR_INTERFACE_H_ */
