@@ -38,15 +38,12 @@
 void Ultrasonic_init(void)
 {
 	ICU_Types ICU_Values = {ULTRASONIC_TIMER,CC_INPUT_TI2,ULTRASONIC_TIMER_CHANNEL,RISING_EDGE};
-
 	GPT_u8Init(ULTRASONIC_TIMER, GPT_u8_COUNT_UP, 15);
-
 	TIMER_VoidICUInit(&ICU_Values);
-
-	GPIO_u8SetPinMode(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, GPIO_u8_OUTPUT_GP_PP_50MHZ);
-
 	GPIO_u8SetPinMode(ULTRASONIC_ECHO_PORT_ID, ULTRASONIC_ECHO_PIN_ID, GPIO_u8_INPUT_FLOATING);
 
+	STK_u8SetmSBusyWait(486);
+	GPIO_u8SetPinMode(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, GPIO_u8_OUTPUT_GP_PP_50MHZ);
 }
 
 /*
@@ -55,6 +52,8 @@ void Ultrasonic_init(void)
 
 void Ultrasonic_Trigger(void)
 {
+	GPIO_u8WritePinValue(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, GPIO_u8_LOW);
+	STK_u8SetmSBusyWait(5);
 	GPIO_u8WritePinValue(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, GPIO_u8_HIGH);
 	STK_u8SetuSBusyWait(10);
 	GPIO_u8WritePinValue(ULTRASONIC_TRIGGER_PORT_ID, ULTRASONIC_TRIGGER_PIN_ID, GPIO_u8_LOW);
@@ -112,7 +111,8 @@ static u16 Ultrasonic_GetDistance(u16 *Distance1,u16 *Distance2)
 {
 	u16 Total_time=*Distance2-*Distance1;
 	u16 total_distance=0;
-	total_distance= (0.0085* Total_time);
+//	total_distance= (0.0085* Total_time);
+	total_distance = Total_time/31;
 	return total_distance;
 }
 
@@ -128,13 +128,10 @@ u16 Ultrasonic_readDistance(void)
 	u16 Distance1=0,Distance2=0,total_distance;
 	/*trigger the Ultra-sonic sensor*/
 	Ultrasonic_Trigger();
-
 	Ultrasonic_readTimer(ULTRASONIC_TIMER,&Distance1,&Distance2,ULTRASONIC_TIMER_CHANNEL);
 	total_distance=Ultrasonic_GetDistance(&Distance1,&Distance2);
 
-	if(total_distance > 0)
-			total_distance += 4;
-	return total_distance;
+	return total_distance ;
 }
 
 
@@ -145,7 +142,6 @@ u16 Ultrasonic_readDistance_average(void)
 	for(i = 0;i<10;i++)
 	{
 		total_distance += Ultrasonic_readDistance();
-		STK_u8SetmSBusyWait(5);
 	}
 	total_distance = total_distance / 10;
 

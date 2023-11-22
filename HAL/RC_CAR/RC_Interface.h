@@ -12,6 +12,10 @@
 #define HAL_RC_CAR_RC_INTERFACE_H_
 
 
+#define START_DISTANCE     10
+#define MINIMUM_DISTANCE   5
+#define MAX_SPEED          80
+
 
 void RC_Init(void);
 void RC_Stop(void);

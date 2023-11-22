@@ -71,21 +71,18 @@ void Motors_Init(void)
 
 void MOTORS_Forward(u8 speed)
 {
-	Motors_Speed(speed);
 	Motor1_Forward();
 	Motor2_Forward();
+	Motors_Speed(speed);
 }
 
 
 void MOTORS_Back(u8 speed)
 {
-	Motors_Speed(speed);
 	Motor1_Back();
 	Motor2_Back();
+	Motors_Speed(speed);
 }
-
-
-
 
 void Motors_Speed(u8 speed)
 {
@@ -134,13 +131,15 @@ void Motor2_Stop(void)
 
 void Motor1_Speed(u8 speed)
 {
+	if(speed <= 98)
+		speed = speed + 1;
 	if(MOTOR1_TIMER == TIMER_u8_1)
 	{
-		TIMER1_u8SetPWM(MOTOR1_TIMER_CC, 100, speed);
+		TIMER1_u8SetPWM(MOTOR1_TIMER_CC, 50, speed);
 	}
 	else
 	{
-		GPT_u8SetPWM(MOTOR1_TIMER, MOTOR1_TIMER_CC, 100, speed);
+		GPT_u8SetPWM(MOTOR1_TIMER, MOTOR1_TIMER_CC, 50, speed);
 	}
 }
 
@@ -148,11 +147,11 @@ void Motor2_Speed(u8 speed)
 {
 	if(MOTOR2_TIMER == TIMER_u8_1)
 	{
-		TIMER1_u8SetPWM(MOTOR1_TIMER_CC, 100, speed);
+		TIMER1_u8SetPWM(MOTOR1_TIMER_CC, 50, speed);
 	}
 	else
 	{
-		GPT_u8SetPWM(MOTOR2_TIMER, MOTOR2_TIMER_CC, 100, speed);
+		GPT_u8SetPWM(MOTOR2_TIMER, MOTOR2_TIMER_CC, 50, speed);
 	}
 }
 

@@ -147,7 +147,7 @@ u8 GPT_u8InitPwmChannel(u8 Copy_u8TimerNumber , u8 Copy_u8PwmChannel)
 		case GPT_u8_PWM_CHANNEL4:
 			GPT_Astr[Copy_u8TimerNumber]->CCMR2 &= ~(0b11<<8);
 			SET_BIT(GPT_Astr[Copy_u8TimerNumber]->CCMR2,11);
-			GPT_Astr[Copy_u8TimerNumber]->CCMR2 |= (0b11 << 13);
+ 			GPT_Astr[Copy_u8TimerNumber]->CCMR2 |= (0b11 << 13);
 			CLR_BIT(GPT_Astr[Copy_u8TimerNumber]->CCMR2,12);
 			CLR_BIT(GPT_Astr[Copy_u8TimerNumber]->CCER,13);
 			SET_BIT(GPT_Astr[Copy_u8TimerNumber]->CCER,12);

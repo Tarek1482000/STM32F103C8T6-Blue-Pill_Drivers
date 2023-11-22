@@ -16,7 +16,6 @@ void SYSTEM_Init(void)
 	STK_u8Init(STK_u8_AHB);
 	RCC_u8InitSysClk();
 
-
 	RCC_u8EnableDisablPeripheralClk(RCC_u8_AFIO, RCC_u8_Enable);
 
 	RCC_u8EnableDisablPeripheralClk(RCC_u8_TIM1, RCC_u8_Enable);
@@ -29,7 +28,6 @@ void SYSTEM_Init(void)
 
 	RCC_u8EnableDisablPeripheralClk(RCC_u8_GPIOB, RCC_u8_Enable);
 
-	RCC_u8EnableDisablPeripheralClk(RCC_u8_GPIOC, RCC_u8_Enable);
 	/*
 	RCC_u8EnableDisablPeripheralClk(RCC_u8_AFIO, RCC_u8_Enable);
 
