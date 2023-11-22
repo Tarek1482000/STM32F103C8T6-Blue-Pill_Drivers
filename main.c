@@ -10,8 +10,6 @@
 
 
 #include "HAL/SYSTEM/SYSTYM_Interface.h"
-#include "HAL/LED/LED_Interface.h"
-#include "HAL/IR_COLOR/IR_COLOR_Interface.h"
 int main(void)
 {
 	SYSTEM_Init();
